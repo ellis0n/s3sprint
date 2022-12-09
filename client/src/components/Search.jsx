@@ -11,7 +11,7 @@ const Search = () => {
         event.preventDefault();
         setRunning(true)
         const jsonQuery = JSON.stringify({searchTerms: query.searchTerms, database: query.database })
-        await fetch("http://localhost:3500/movies", {
+        await fetch("http://localhost:3500/query", {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -20,7 +20,9 @@ const Search = () => {
             body: jsonQuery,
             })
         .then((response) => response.json())
-        .then((response) => setResults(response), console.log(results))
+        .then((response) => setResults(response))
+        .catch((error) => console.log(error))
+        setQuery({searchTerms: "", database: "mongo"})
     }
 
 
@@ -28,6 +30,7 @@ const Search = () => {
     <>
     <div className = "search">
         <form onSubmit={handleSubmit}>
+            <div className = "input">
         <label>
             Database:
             <select
@@ -39,6 +42,8 @@ const Search = () => {
                 <option value="postgres">PostgreSQL</option>
             </select>
         </label>
+        </div>
+        <div className = "input">
         <label>
             Query:
             <input
@@ -47,7 +52,10 @@ const Search = () => {
             onChange={(e) => setQuery({searchTerms: e.target.value, database: query.database})}
             />
         </label>
+        </div>
         <input type="submit" value="Search" />
+        
+        {running ?  <div className="resultNum"> <p>{results.length} results.</p> </div> : null}
         </form>
     </div>
     {running ? <Results results={results} /> : null}

@@ -1,24 +1,17 @@
 const Movie = require("../model/Movie");
-const Query = require("../model/Query");
 
 const getMovies = async (req, res) => {
-  console.log(req.body.searchTerms)
-  try{
-    let savedQuery = await Query.create({
-      searchTerms: req.body.searchTerms,
-      database: req.body.database
-    })
-    let result = await Movie.find({
-      $or: [
-        { title: { $regex: req.body.searchTerms, $options: "i" } },
-        { genre: { $regex: req.body.searchTerms, $options: "i" } },
-      ],
-    });
-    res.json(result)
-    console.log(savedQuery);
+  try {
+    let count = await Movie.countDocuments();
+    count = count.toString();
+    res.send({total: count});
   } catch (err) {
+    res.status(500).json({ message: err.message });
     console.log(err);
   }
 };
+
+
+
 
 module.exports = { getMovies };
