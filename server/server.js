@@ -13,6 +13,7 @@ const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 
 
+
 // Connect to database
 connectDB();
 
@@ -33,7 +34,9 @@ app.use("/", express.static(path.join(__dirname, "/public")));
 app.use("/", require("./routes/root"));
 app.use("/query", require("./routes/api/query"));
 app.use("/movies", require("./routes/api/movies"));
-// app.use("/logout", require("./routes/api/logout"));
+app.use("/login", require("./routes/api/users"));
+app.use("/register", require("./routes/api/users"));
+
 
 // 404
 app.all("*", (req, res) => {

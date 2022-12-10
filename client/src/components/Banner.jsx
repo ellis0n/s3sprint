@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 
-const Banner = () => {
+const Banner = ({username}) => {
   const [total, setTotal] = useState(null)
 
   useEffect(() => {
@@ -24,6 +24,9 @@ const Banner = () => {
     <div className='banner'>
       <h1>movieAPI</h1>
         <p id="slogan">{`Over ${total-1} movies you've never heard of.`}</p>
+        <div className='user-wrapper'>
+          <p>{username}</p>
+        </div>
     </div>
   )
 }

@@ -5,6 +5,7 @@ const Search = () => {
   const [query, setQuery] = useState({searchTerms: "", database: "mongo"});
   const [results, setResults] = useState([])
   const [running, setRunning] = useState(false)
+
   
     const handleSubmit = async (event) => {
         console.log(query)
@@ -31,31 +32,36 @@ const Search = () => {
     <div className = "search">
         <form onSubmit={handleSubmit}>
             <div className = "input">
-        <label>
-            Database:
-            <select
-            value={query.database}
-            onChange={(e) => 
-                setQuery({searchTerms: query.searchTerms, database: e.target.value})}
-            >
-                <option value="mongo">MongoDB</option>
-                <option value="postgres">PostgreSQL</option>
-            </select>
-        </label>
-        </div>
+                <label>
+                Database:
+                <select
+                value={query.database}
+                onChange={(e) => 
+                    setQuery({searchTerms: query.searchTerms, database: e.target.value})}
+                >
+                    <option value="mongo">MongoDB</option>
+                    <option value="postgres">PostgreSQL</option>
+                </select>
+                 </label>
+            </div>
         <div className = "input">
-        <label>
-            Query:
-            <input
-            type="text"
-            value={query.searchTerms}
-            onChange={(e) => setQuery({searchTerms: e.target.value, database: query.database})}
-            />
-        </label>
+            <label>
+                Query:
+                <input
+                    type="text"
+                    value={query.searchTerms}
+                    onChange={(e) => setQuery({searchTerms: e.target.value, database: query.database})}
+                 />
+            </label>
         </div>
         <input type="submit" value="Search" />
-        
-        {running ?  <div className="resultNum"> <p>{results.length} results.</p> </div> : null}
+
+        {running ? 
+        <div className="resultNum"> 
+            <p>{results.length} results.</p>
+        </div>
+         : null}
+
         </form>
     </div>
     {running ? <Results results={results} /> : null}
