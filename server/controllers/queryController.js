@@ -1,16 +1,24 @@
 const Query = require("../model/Query");
 const Movie = require("../model/Movie");
+const { Client } = require('pg');
+const pgClient = require("../config/dbConn");
 
 
 const postQuery = async (req, res) => {
     let query = req.body;
+    console.log(query)
     saveQuery(query);
     switch (req.body.database) {
         case "postgres":
+            
             console.log("Postgres Search Terms: ", query);
-            const pgResult = await pgQuery(query).then((results) => {
+
+            const pgResult = await pgClient.connect().then(()=>{ pgQuery(query).then((results) => {
+                console.log(results)
                 res.json(results)
             });
+        });
+
             break;
         case "mongo":
             console.log("MongoDB Search Terms: ", query);
@@ -40,7 +48,6 @@ const mongoQuery = async({searchTerms, review}) => {
             ],
             review: { $eq: review },
             });
-        console.log(result)
         return result;
     } catch (err) {
         console.log(err);
@@ -49,14 +56,16 @@ const mongoQuery = async({searchTerms, review}) => {
 
 const pgQuery = async (query) => {
     try {
-        let result = await db.any(
-        `SELECT * FROM movies WHERE title ILIKE '%${query}%' OR genre ILIKE '%${query}%'`
+        let result = await pgClient.query(
+            `SELECT * FROM movies WHERE title ILIKE '%${query.searchTerms}%' OR genre ILIKE '%${query.searchTerms}%' OR genre = ANY('{${query.searchTerms.split("|")}}') AND review = '${query.review}'`
         );
-        return result;
+        console.log(result)
+        return result.rows;
     } catch (err) {
         console.log(err);
     }
 };
+        
 
 
 module.exports = { postQuery };
