@@ -16,26 +16,112 @@ body{
   border: 10px solid rgba(31, 27, 5, 0.14);
 }
 
-.result-wrapper{
-  display: flex;
-  flex-direction: column;
-  justify-content: right;
-  margin: 2% 2% 2% 2%;
-  width: auto;
 
-}
+  .result-wrapper{
+    display: block;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2% 2% 2% 2%;
+    width: auto;
+  }
 
-.result{
-  border: 2px solid rgb(31, 27, 5);
-  background-color: #485563e6;
-  margin-bottom: 20px;
-  padding: 10px;
-}
+  .result img{
+      max-width: 75%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-.result h3{
-  font-family: 'Courier New', Courier, monospace;
-  margin: 12%;
-}
+  .result{
+    border: 2px solid rgb(31, 27, 5);
+    background-color: #485563e6;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 1%;
+
+  }
+
+  .result h3{
+    font-family: 'Courier New', Courier, monospace;
+    margin: 12%;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  @media (min-width:500px)  { 
+    .result-wrapper{
+      display: flex;
+      flex-direction: column;
+      max-height: 100%;
+      height: 50%;
+    }
+
+    .result{
+      grid-template-areas: 
+      "tit tit tit "
+      "img sta gen";
+      display: grid;
+      width: auto;
+      margin: 0 1% 0 1%;
+      padding: 1em;
+      border-radius: 1%;
+    }
+
+
+    .title{
+      grid-area: "tit";
+      grid-template: "img title";
+      font-family: 'Courier New', Courier, monospace;
+      margin: 2%;
+      padding: 0;
+      font-size: 1em;
+      font-weight: 700;
+      color: #fff;
+      width: 200px;
+
+    }
+    h3{
+      padding: 0;
+      margin: 0;
+    }
+    .coverimg-wrapper{
+      grid-area: "img";
+      width: 200px;
+      overflow: hidden;;
+      display: flex;
+      justify-content: center;
+    }
+
+    .coverimg{
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    .stars{
+      grid-area: "sta";
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1em;
+      font-weight: 700;
+      color: #fff;
+    }
+    .genre-wrapper{
+      grid-area: "gen";
+      display: flex;
+      justify-content: centre;
+      flex-wrap: wrap;
+    }
+    .genre{
+      font-family: 'Courier New', Courier, monospace;
+      font-size: .5em;
+      font-weight: 700;
+      color: #fff;
+      border: 2px solid rgb(31, 27, 5);
+      background-color: #29323ce3;
+      padding: 0 5px 0 5px;
+    }
+
+  }
 
 .banner{
   background-color: #29323ce3;
@@ -84,9 +170,3 @@ body{
   /* animate to rise from bottom */
 }
 
-img{
-  max-width: 75%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}

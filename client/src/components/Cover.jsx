@@ -37,9 +37,9 @@ const Cover = ({movieName}) => {
     
 
     return (
-    <>
+    <div className = "coverimg">
         {!imageUrl ? null :  <img src={imageUrl} alt={movieName} />}
-    </>
+    </div>
     )
 }
 

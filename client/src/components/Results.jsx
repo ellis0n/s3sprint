@@ -18,15 +18,21 @@ const Results = (props) => {
     <div className = "result-wrapper">
         {props.results.map((result) => (
             <div key={result.id} className="result">
-                <h3>{result.title}</h3>
+                <div className="title"><h3>{result.title}</h3></div>
 
-                <Cover movieName = {result.title}/>
-                <div className = "stars">{renderStars(result.review)}</div>
-                <p>{result.review} Stars </p>
+                <div className = "coverimg-wrapper">
+                    <Cover movieName = {result.title}/>
+                </div>
+
+                <div className = "stars">   {renderStars(result.review)}
+                  <p>{result.review} Stars </p>
+                </div>
+
+                <div className ="genre-wrapper">
                 {result.genre.split("|").map((genre, index) => (
-                    <div key = {index}>{genre}</div>
+                    <div className= "genre" key = {index}>{genre}</div>
                 ))}
-                <p>{result.year}</p>
+                </div>
 
             </div>))}
     </div>

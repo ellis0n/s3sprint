@@ -1,7 +1,6 @@
 const Query = require("../model/Query");
 const Movie = require("../model/Movie");
 const { Client } = require('pg');
-const pgClient = require("../config/dbConn");
 
 
 const postQuery = async (req, res) => {
@@ -10,15 +9,12 @@ const postQuery = async (req, res) => {
     saveQuery(query);
     switch (req.body.database) {
         case "postgres":
-            
             console.log("Postgres Search Terms: ", query);
 
-            const pgResult = await pgClient.connect().then(()=>{ pgQuery(query).then((results) => {
+             pgQuery(query).then((results) => {
                 console.log(results)
                 res.json(results)
             });
-        });
-
             break;
         case "mongo":
             console.log("MongoDB Search Terms: ", query);
@@ -55,9 +51,18 @@ const mongoQuery = async({searchTerms, review}) => {
 };
 
 const pgQuery = async (query) => {
+
+    const  pgClient = new Client({
+        user: 'postgres',
+        host: '127.0.0.1.',
+        database: 'sprint2',
+        password: process.env.POSTGRES_PW,
+        port: 5432,
+        });
+    pgClient.connect();
     try {
         let result = await pgClient.query(
-            `SELECT * FROM movies WHERE title ILIKE '%${query.searchTerms}%' OR genre ILIKE '%${query.searchTerms}%' OR genre = ANY('{${query.searchTerms.split("|")}}') AND review = '${query.review}'`
+            `SELECT * FROM movies WHERE title ILIKE '%${query.searchTerms}%' OR genre ILIKE '%${query.searchTerms}%' OR genre = ANY('{${query.searchTerms.split("|")}}')`
         );
         console.log(result)
         return result.rows;
