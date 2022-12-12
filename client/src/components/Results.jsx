@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Cover from "./Cover.jsx";
@@ -9,7 +9,7 @@ const Results = (props) => {
   const renderStars = (rating) => {
       let stars = []  
       for (let i = 0; i < rating; i++) {
-          stars.push(<FontAwesomeIcon key= {i} icon={faStar} color="gold"/>)
+          stars.push(<FontAwesomeIcon key= {i} icon={faStar} color="gold" size='2x'/>)
       } 
       return stars
   }

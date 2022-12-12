@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Results from "./Results.jsx";
 
 const Search = () => {
-  const [query, setQuery] = useState({searchTerms: "", database: "mongo"});
+  const [query, setQuery] = useState({searchTerms: "", database: "searchall"});
   const [results, setResults] = useState([])
   const [running, setRunning] = useState(false)
 
@@ -41,6 +41,8 @@ const Search = () => {
                 >
                     <option value="mongo">MongoDB</option>
                     <option value="postgres">PostgreSQL</option>
+                    <option 
+                    value="searchall">Search All</option>
                 </select>
                  </label>
             </div>
@@ -54,6 +56,7 @@ const Search = () => {
                  />
             </label>
         </div>
+     
         <input type="submit" value="Search" />
 
         {running ? 

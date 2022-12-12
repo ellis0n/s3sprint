@@ -10,9 +10,7 @@ const postQuery = async (req, res) => {
     switch (req.body.database) {
         case "postgres":
             console.log("Postgres Search Terms: ", query);
-
              pgQuery(query).then((results) => {
-                console.log(results)
                 res.json(results)
             });
             break;
@@ -22,8 +20,18 @@ const postQuery = async (req, res) => {
                 res.json(results)
             });
             break;
-    }
+        case "searchall":
+            let resultArray = [];
+            console.log("MongoDB and PostgresSearch Terms: ", query);
+            const bothResult1 = await mongoQuery(query).then((results) => {
+                resultArray.push(results)
+            });
+            const bothResult2 = await pgQuery(query).then((results) => {
+                resultArray.push(results)
+            })
+            console.log(resultArray)
 
+    }
 };
 
 const saveQuery = async ({searchTerms, database})=> {
