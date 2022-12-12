@@ -1,10 +1,9 @@
 CREATE TABLE public.movies (
-  _id INT8 NOT NULL DEFAULT unique_rowid(),
   id INT4 NULL,
-  title VARCHAR(50) NULL,
-  genre VARCHAR(50) NULL,
+  title VARCHAR(200) NULL,
+  genre VARCHAR(200) NULL,
   review INT4 NULL,
-  CONSTRAINT movies_pkey PRIMARY KEY (_id ASC)
+  CONSTRAINT movies_pkey PRIMARY KEY (id)
 )
 insert into movies (id, title, genre, review) values (1, 'Rembrandt''s J''accuse', 'Documentary|Mystery', 3);
 insert into movies (id, title, genre, review) values (2, 'Nickelodeon', 'Comedy', 1);
