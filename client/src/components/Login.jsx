@@ -2,29 +2,32 @@ import React, { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import PartnerLogin from './PartnerLogin'
 import PartnerLogout from './PartnerLogout'
+import { useEffect } from 'react'
 
-const Login = ({handleLogin}) => {
+const Login = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
-    
-    const [credentials, setCredentials] = useState({username: undefined, password:undefined})
+    const {isAuthenticated} = useAuth0();
+    const [credentials, setCredentials] = useState({"username": "", "password": ""})
+
+
+    useEffect(() => {
+        setIsLoggedIn(isAuthenticated)
+    }, [isAuthenticated])
+
 
     const handleClick=async(e)=>{
         e.preventDefault()
-        console.log(typeof(toggle))
-        await handleLogin(credentials);
-
+        setIsLoggedIn(true)
     }
-
-
-
 
     return (
 
 
         <div className = "search">
             <form onSubmit={handleClick}>
-                <div>
+                <div className = "input-wrapper">
                     <label>
                         Username:
                         <input
@@ -34,7 +37,7 @@ const Login = ({handleLogin}) => {
                         />
                     </label>
                 </div>
-                <div>
+                <div className = "input-wrapper">
                     <label>
                         Password:
                         <input
@@ -44,10 +47,11 @@ const Login = ({handleLogin}) => {
                         />
                     </label>
                 </div>
-                    <input type="submit" value="Login" />
+                    <input type="submit" id = "submit" value="Login"/> 
+                    <p>OR</p>
+                    <PartnerLogin/>
+
             </form>
-            <PartnerLogin/>
-            <PartnerLogout className="login-button"/>
         </div>
     )
 }

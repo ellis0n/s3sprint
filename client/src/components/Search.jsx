@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Results from "./Results.jsx";
+import {useAuth0} from '@auth0/auth0-react';
+import Login from './Login.jsx';
 
 const Search = () => {
   const [query, setQuery] = useState({
@@ -8,10 +10,20 @@ const Search = () => {
   });
   const [results, setResults] = useState([]);
   const [running, setRunning] = useState(false);
+  const { isAuthenticated} = useAuth0();
+
+  const displayError = () => {
+    alert("Please sign in with your partner account to use this feature.")
+  }
 
 
   const handleSubmit = async (event) => {
-    console.log(query);
+    console.log(isAuthenticated)
+    if (!isAuthenticated){
+      displayError();
+    } else{
+    
+    // console.log(query);
     event.preventDefault();
     setRunning(true);
     const jsonQuery = JSON.stringify({
@@ -29,12 +41,13 @@ const Search = () => {
       .then((response) => response.json())
       .then((response) => setResults(response))
       .catch((error) => console.log(error));
-    setQuery({ searchTerms: "", database: "mongo" });
-  };
+    setQuery({ searchTerms: "", database: "searchall" });
+  }};
 
   return (
-    <>
+    <> 
       <div className="search">
+      {!isAuthenticated ? <div><h4>Please log in to access movieAPI.</h4><Login/></div> :
         <form onSubmit={handleSubmit}>
           <div className="input">
             <label>
@@ -77,9 +90,10 @@ const Search = () => {
               <p>{results.length} results.</p>
             </div>
           ) : null}
-        </form>
+        </form>}
       </div>
       {running ? <Results results={results} /> : null}
+      
     </>
   );
 };

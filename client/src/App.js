@@ -33,13 +33,13 @@ function App() {
   
   return (
     <div className="App">
-      <Banner username={user}/>
+      <Banner />
         <Routes>
           <Route
             path="/"
-            element={<Login />}
+            element={<Search />}
           />
-          <Route path="/home" element={<Search />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
   </div>
   );

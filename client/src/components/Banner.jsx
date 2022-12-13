@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import Profile from './Profile'
 // import { useAuth0 } from '@auth0/auth0-react'
 
-const Banner = ({username}) => {
+const Banner = () => {
   const [total, setTotal] = useState(null)
   const [scrollY, setScrollY] = useState(0);
 
@@ -31,11 +31,13 @@ const Banner = ({username}) => {
     });
   }, []);
 
-  const scrollBanner = scrollY >  75 ? { position: 'fixed', top: 0,  width: "95%", background: "#29323c", height: "2em", font: "1em",zIndex: 1} : {};
+  const scrollBanner = scrollY >  75 ? { position: 'fixed', top: 0,  width: "100%", background: "#29323c", height: "2em", font: "1em", zIndex: 1} : {};
 
-  const scrollSlogan = scrollY <  75 ? { display: "none"} : {display: 'block'};
+  const scrollSlogan = scrollY >  75 ? { display: "block"} : {display: 'none'};
 
   const scrollLogo = scrollY >  75 ? { display: 'block'} : { display: 'none'};
+
+  const scrollProf = scrollY > 75 ? { display: 'none'} : { display: 'block'};
 
   return (
     <div className='banner' style={scrollBanner}>
@@ -45,7 +47,7 @@ const Banner = ({username}) => {
       <div className = "slogan" display={scrollSlogan}>
         <p>{`Over ${total-1} movies you've never heard of.`}</p>
       </div>
-        <Profile />
+        <Profile style = {scrollProf}/>
     </div>
   )
 }
