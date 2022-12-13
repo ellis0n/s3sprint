@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [user, setUser] = useState("");
 
   const handleLogin = async(credentials) => {
@@ -25,11 +24,10 @@ function App() {
       .then((response) => {
           console.log(response)
           if (response.message === "success") {
-            setIsLoggedIn(true);
             setUser(credentials.username);
           }})
       .catch((error) => console.log(error))
-      return {isLoggedIn, user}
+      return { user}
         };
 
   
@@ -39,15 +37,9 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              isLoggedIn ? (
-                <Search username={user}/>
-              ) : (
-                <Login handleLogin={handleLogin()}/>
-              )
-            }
+            element={<Login />}
           />
-          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Search />} />
         </Routes>
   </div>
   );

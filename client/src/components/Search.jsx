@@ -9,6 +9,7 @@ const Search = () => {
   const [results, setResults] = useState([]);
   const [running, setRunning] = useState(false);
 
+
   const handleSubmit = async (event) => {
     console.log(query);
     event.preventDefault();

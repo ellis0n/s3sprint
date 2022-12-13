@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
+import PartnerLogin from './PartnerLogin'
+import PartnerLogout from './PartnerLogout'
 
 const Login = ({handleLogin}) => {
+
+
     
     const [credentials, setCredentials] = useState({username: undefined, password:undefined})
 
@@ -15,6 +20,8 @@ const Login = ({handleLogin}) => {
 
 
     return (
+
+
         <div className = "search">
             <form onSubmit={handleClick}>
                 <div>
@@ -39,6 +46,8 @@ const Login = ({handleLogin}) => {
                 </div>
                     <input type="submit" value="Login" />
             </form>
+            <PartnerLogin/>
+            <PartnerLogout className="login-button"/>
         </div>
     )
 }

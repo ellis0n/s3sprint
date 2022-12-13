@@ -62,7 +62,7 @@ body{
   justify-content: center;
 }
 
-@media (min-width:500px)  { 
+@media (min-width:512px)  { 
   .result-wrapper{
     display: flex;
     flex-direction: column;
@@ -116,12 +116,15 @@ body{
 
   .stars{
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1em;
+    font-size: .2em;
     font-weight: 700;
     color: #fff;
-    position: relative;
-    object-fit: cover;
+    /* position: relative; */
+    /* object-fit: cover; */
+    align-content: right;
+    margin-left: 12%;
   }
+
   .genre-wrapper{
     display: flex;
     justify-content: right;
@@ -165,14 +168,14 @@ body{
 
 .banner{
   background-color: #29323ce3;
-  padding: 20px 10px 0px 10px;
-  /* display: flex; */
-  flex-direction: column;
+  /* padding: 20px 10px 0px 10px; */
+  display: flex;
   justify-content: center;
   margin: 0% 0 0 0%;
   border: 4px solid rgba(31, 27, 5, 0.14);
   border-radius: 1%;
   transition: all .5s ease-in-out;
+  justify-content: space-between;
 
 }
 
@@ -181,6 +184,15 @@ body{
   font-size: .5em;
   font-style: italic;
   display: none;
+}
+
+.logo h1{
+  text-align: center;
+}
+
+.banner-user{
+  flex: end;
+  padding: 1px;
 }
 
 .slogan{
@@ -215,3 +227,28 @@ body{
   background-color: #29323c25 ;
   }
 
+
+.banner-profile img{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.banner-profile{
+  display: inline-block;
+  position: relative;
+  flex-wrap: nowrap;
+
+}
+
+.banner-button{
+  background-color: rgba(255, 255, 255, 0.809);
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  color: #29323ce3;
+  border: 1px solid #29323ce3;
+  font-size: .5em;
+  border-radius: 2px;;
+
+}

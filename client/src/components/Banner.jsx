@@ -1,5 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import Profile from './Profile'
+// import { useAuth0 } from '@auth0/auth0-react'
 
 const Banner = ({username}) => {
   const [total, setTotal] = useState(null)
@@ -43,9 +45,7 @@ const Banner = ({username}) => {
       <div className = "slogan" display={scrollSlogan}>
         <p>{`Over ${total-1} movies you've never heard of.`}</p>
       </div>
-      <div className='user-wrapper'>
-          <p>{username}</p>
-        </div>
+        <Profile />
     </div>
   )
 }
