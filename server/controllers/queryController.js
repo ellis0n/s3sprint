@@ -34,10 +34,12 @@ const postQuery = async (req, res) => {
   }
 };
 
-const saveQuery = async ({ searchTerms, database }) => {
+const saveQuery = async ({ searchTerms, database, user, date }) => {
   await Query.create({
     searchTerms: searchTerms,
     database: database,
+    user: user,
+    date: date,
   });
 };
 
