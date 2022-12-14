@@ -4,7 +4,6 @@ import PartnerLogout from "./PartnerLogout";
 
 const Profile = ({ style }) => {
   const { user, isAuthenticated } = useAuth0();
-  console.log(user);
 
   return (
     isAuthenticated && (

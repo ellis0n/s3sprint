@@ -17,7 +17,6 @@ const Search = () => {
   };
 
   const handleSubmit = async (event) => {
-    console.log(isAuthenticated);
     if (!isAuthenticated) {
       displayError();
     } else {
