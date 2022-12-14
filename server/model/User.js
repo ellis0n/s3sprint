@@ -1,3 +1,4 @@
+// This file contains the schema for adding and authorizing users (NOTE: not in use)
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -10,10 +11,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  password:{
+  password: {
     type: String,
     required: true,
-  }
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
