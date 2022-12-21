@@ -35,4 +35,9 @@ const connectDB = async () => {
   }
 };
 
-module.exports = { connectDB, connectPG, pgClient };
+const closeDB = async () => {
+  await mongoose.connection.close();
+};
+
+
+module.exports = { connectDB, connectPG, pgClient, closeDB };

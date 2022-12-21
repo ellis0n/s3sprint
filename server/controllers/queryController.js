@@ -30,13 +30,13 @@ const postQuery = async (req, res) => {
       console.log("MongoDB and PostgresSearch Terms: ", query);
       try {
         await mongoQuery(query).then((results) => {
-          console.log(results);
+          // console.log(results);
           resultArray = resultArray.concat(results);
         });
         await pgQuery(query).then((results) => {
           resultArray = resultArray.concat(results);
         });
-        console.log(resultArray);
+        // console.log(resultArray);
       } catch (err) {
         console.log(err);
       }
@@ -47,12 +47,13 @@ const postQuery = async (req, res) => {
 // Store each query in the mongoDB database
 const saveQuery = async ({ searchTerms, database, user, date }) => {
   try {
-    await Query.create({
+    const save = await Query.create({
       searchTerms: searchTerms,
       database: database,
       user: user,
       date: date,
     });
+    return save;
   } catch (err) {
     console.log(err);
   }
@@ -91,4 +92,4 @@ const pgQuery = async (query) => {
   }
 };
 
-module.exports = { postQuery };
+module.exports = { saveQuery, postQuery, mongoQuery };
