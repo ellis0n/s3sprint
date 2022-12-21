@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Profile from "./Profile";
 
+// Banner component that displays the logo and profile from Auth0
 const Banner = () => {
   const [total, setTotal] = useState(null);
   const [scrollY, setScrollY] = useState(0);
@@ -41,7 +42,7 @@ const Banner = () => {
       : {};
 
   const scrollSlogan =
-    scrollY > 75 ? { display: "block" } : { display: "none" };
+    scrollY > 75 ? { display: "block" } : { display: "block" };
 
   const scrollLogo = scrollY > 75 ? { display: "block" } : { display: "none" };
 
