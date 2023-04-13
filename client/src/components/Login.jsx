@@ -1,33 +1,31 @@
-import React, { useState } from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
-import PartnerLogin from './PartnerLogin'
-import PartnerLogout from './PartnerLogout'
-import { useEffect } from 'react'
+import React, { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import PartnerLogin from "./PartnerLogin";
+import PartnerLogout from "./PartnerLogout";
+import { useEffect } from "react";
 
 const Login = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+	const { isAuthenticated } = useAuth0();
+	const [credentials, setCredentials] = useState({
+		username: "",
+		password: "",
+	});
 
-    const {isAuthenticated} = useAuth0();
-    const [credentials, setCredentials] = useState({"username": "", "password": ""})
+	useEffect(() => {
+		setIsLoggedIn(isAuthenticated);
+	}, [isAuthenticated]);
 
+	const handleClick = async (e) => {
+		e.preventDefault();
+		setIsLoggedIn(true);
+	};
 
-    useEffect(() => {
-        setIsLoggedIn(isAuthenticated)
-    }, [isAuthenticated])
-
-
-    const handleClick=async(e)=>{
-        e.preventDefault()
-        setIsLoggedIn(true)
-    }
-
-    return (
-
-
-        <div className = "search">
-            <form onSubmit={handleClick}>
-                <div className = "input-wrapper">
+	return (
+		<div className="search">
+			<form onSubmit={handleClick}>
+				{/* <div className = "input-wrapper">
                     <label>
                         Username:
                         <input
@@ -48,12 +46,11 @@ const Login = () => {
                     </label>
                 </div>
                     <input type="submit" id = "submit" value="Login"/> 
-                    <p>OR</p>
-                    <PartnerLogin/>
+                    <p>OR</p> */}
+				<PartnerLogin />
+			</form>
+		</div>
+	);
+};
 
-            </form>
-        </div>
-    )
-}
-
-export default Login
+export default Login;

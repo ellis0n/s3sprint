@@ -4,10 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Login from "./Login.jsx";
 
 const Search = () => {
-	const [query, setQuery] = useState({
-		searchTerms: "",
-		database: "searchall",
-	});
+	const [query, setQuery] = useState("");
 	const [results, setResults] = useState([]);
 	const [running, setRunning] = useState(false);
 	const { user, isAuthenticated } = useAuth0();
@@ -20,7 +17,6 @@ const Search = () => {
 		if (!isAuthenticated) {
 			displayError();
 		} else {
-			// console.log(query);
 			event.preventDefault();
 			setRunning(true);
 			// const jsonQuery = JSON.stringify({
@@ -29,9 +25,8 @@ const Search = () => {
 			// 	user: user.email,
 			// 	date: new Date().toLocaleString(),
 			// });
-			console.log(query.searchTerms);
 			await fetch(
-				`http://localhost:8080/movie/search/findByTitle?title=${query.searchTerms}`,
+				`http://localhost:8080/movie/search/findByTitle?title=${query}`,
 				{
 					method: "GET",
 					// headers: {
@@ -45,7 +40,7 @@ const Search = () => {
 				.then((response) => setResults(response._embedded.movie))
 				// setResults(response))
 				.catch((error) => console.log(error));
-			setQuery({ searchTerms: "", database: "searchall" });
+			setQuery("");
 		}
 	};
 
@@ -61,34 +56,11 @@ const Search = () => {
 					<form onSubmit={handleSubmit}>
 						<div className="input">
 							<label>
-								Database:
-								<select
-									value={query.database}
-									onChange={(e) =>
-										setQuery({
-											searchTerms: query.searchTerms,
-											database: e.target.value,
-										})
-									}
-								>
-									<option value="searchall">Search All</option>
-									<option value="mongo">MongoDB</option>
-									<option value="postgres">PostgreSQL</option>
-								</select>
-							</label>
-						</div>
-						<div className="input">
-							<label>
 								Query:
 								<input
 									type="text"
-									value={query.searchTerms}
-									onChange={(e) =>
-										setQuery({
-											searchTerms: e.target.value,
-											database: query.database,
-										})
-									}
+									value={query}
+									onChange={(e) => setQuery(e.target.value)}
 								/>
 							</label>
 						</div>
