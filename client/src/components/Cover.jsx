@@ -8,8 +8,6 @@ const Cover = ({ movieName }) => {
 
 	useEffect(() => {
 		const getMovieCover = async (movieName) => {
-			// const API_KEY = "b28d78f880bc5ab58070eba3767ec978"; // Todo: Put in ENV file
-
 			const options = {
 				method: "GET",
 				url: `https://api.themoviedb.org/3/search/movie`,
