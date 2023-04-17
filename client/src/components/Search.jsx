@@ -35,9 +35,7 @@ const Search = () => {
 					url = `http://localhost:8080/movie/search/findByGenreContaining?genre=${searchTerms}`;
 					break;
 				case "review":
-					url = `http://localhost:8080/movie/search/findByReview?review=${parseInt(
-						searchTerms
-					)}`;
+					url = `http://localhost:8080/movie/search/findByReview?review=${searchTerms}`;
 					break;
 				default:
 					url = `http://localhost:8080/movie/search/findByAllContaining?searchTerm=${searchTerms}`;
@@ -49,6 +47,22 @@ const Search = () => {
 			// 	user: user.email,
 			// 	date: new Date().toLocaleString(),
 			// });
+
+			if (searchType === "review") {
+				console.log(typeof searchTerms);
+				if (
+					searchTerms === "1" ||
+					searchTerms === "2" ||
+					searchTerms === "3" ||
+					searchTerms === "4" ||
+					searchTerms === "5"
+				) {
+					url = `http://localhost:8080/movie/search/findByReview?review=${searchTerms}`;
+				} else {
+					alert("Please enter a number between 1 and 5.");
+					return;
+				}
+			}
 			console.log(url);
 			await fetch(url, {
 				method: "GET",
