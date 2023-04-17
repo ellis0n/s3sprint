@@ -79,6 +79,10 @@ const Search = () => {
 								Query:
 								<input
 									type="text"
+									placeholder="&#x1F50D; Title, Genre, Rating(1-5)..."
+									pattern="^[ ,a-zA-Z1234567890]+$"
+									title="No special characters"
+									required
 									onChange={(e) =>
 										setQuery({
 											searchType: query.searchType,
