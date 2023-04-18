@@ -7,15 +7,10 @@ import { useEffect } from "react";
 const Login = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-	const { isAuthenticated } = useAuth0();
 	const [credentials, setCredentials] = useState({
 		username: "",
 		password: "",
 	});
-
-	useEffect(() => {
-		setIsLoggedIn(isAuthenticated);
-	}, [isAuthenticated]);
 
 	const handleClick = async (e) => {
 		e.preventDefault();
