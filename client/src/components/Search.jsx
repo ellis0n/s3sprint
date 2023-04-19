@@ -19,19 +19,19 @@ const Search = () => {
 		setRunning(true);
 		switch (searchType) {
 			case "all":
-				url = `http://localhost:8080/movie/search/findByAllContaining?searchTerm=${searchTerms}`;
+				url = `http://movieapibackend-env-1.eba-xiae5zzh.us-east-1.elasticbeanstalk.com/movie/search/findByAllContaining?searchTerm=${searchTerms}`;
 				break;
 			case "title":
-				url = `http://localhost:8080/movie/search/findByTitleContaining?title=${searchTerms}`;
+				url = `http://movieapibackend-env-1.eba-xiae5zzh.us-east-1.elasticbeanstalk.com/movie/search/findByTitleContaining?title=${searchTerms}`;
 				break;
 			case "genre":
-				url = `http://localhost:8080/movie/search/findByGenreContaining?genre=${searchTerms}`;
+				url = `http://movieapibackend-env-1.eba-xiae5zzh.us-east-1.elasticbeanstalk.com/movie/search/findByGenreContaining?genre=${searchTerms}`;
 				break;
 			case "review":
-				url = `http://localhost:8080/movie/search/findByReview?review=${searchTerms}`;
+				url = `http://movieapibackend-env-1.eba-xiae5zzh.us-east-1.elasticbeanstalk.com/movie/search/findByReview?review=${searchTerms}`;
 				break;
 			default:
-				url = `http://localhost:8080/movie/search/findByAllContaining?searchTerm=${searchTerms}`;
+				url = `http://movieapibackend-env-1.eba-xiae5zzh.us-east-1.elasticbeanstalk.com/movie/search/findByAllContaining?searchTerm=${searchTerms}`;
 		}
 
 		// const jsonQuery = JSON.stringify({
@@ -50,7 +50,7 @@ const Search = () => {
 				searchTerms === "4" ||
 				searchTerms === "5"
 			) {
-				url = `http://localhost:8080/movie/search/findByReview?review=${searchTerms}`;
+				url = `http://movieapibackend-env-1.eba-xiae5zzh.us-east-1.elasticbeanstalk.com/movie/search/findByReview?review=${searchTerms}`;
 			} else {
 				alert("Please enter a number between 1 and 5.");
 				return;
